@@ -1,0 +1,1897 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "goose-track-REST-API",
+    "description": "The API for the Goose Track application.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://petstore3.swagger.io/api/v3"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Tasks"
+    },
+    {
+      "name": "Reviews"
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Create user",
+        "description": "You will receive a token (active for 1 hour) and must verify your email.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Podoliako Oleksandr"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "podoliako@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "writeOnly": true,
+                    "example": "0810Red!@"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmJkY2Y3ZTZiNWYwN2ZlZGQzY2JjOCIsImlhdCI6MTY5MDIzMDg2MiwiZXhwIjoxNjkwMzEzNjYyfQ.YeLDFL1x6dmKQk8HgTCHRCUhuXCfuB-wxcAsYKzF0iQ"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "Podoliako Oleksandr"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "podoliako@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "409": {
+            "description": "Email in use"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logs user into the application",
+        "description": "This can only be done by registered user. Token active for 23 hour.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "podoliako@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "writeOnly": true,
+                    "example": "0810Red!@"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmJkY2Y3ZTZiNWYwN2ZlZGQzY2JjOCIsImlhdCI6MTY5MDIzMDg2MiwiZXhwIjoxNjkwMzEzNjYyfQ.YeLDFL1x6dmKQk8HgTCHRCUhuXCfuB-wxcAsYKzF0iQ"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "Podoliako Oleksandr"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "podoliako@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Email or password is wrong"
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logs out current logged in user session",
+        "description": "This can only be done by an authorised user.",
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/auth/current": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Getting a valid user",
+        "description": "This can only be done by an authorised user.",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Podoliako Oleksandr"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email",
+                      "example": "podoliako@gmail.com"
+                    },
+                    "birthday": {
+                      "type": "string",
+                      "example": "1980-01-09T19:14:28.000Z"
+                    },
+                    "skype": {
+                      "type": "string",
+                      "example": "podoliako987"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "example": "+380677822481"
+                    },
+                    "avatarURL": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/auth": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Update user information",
+        "description": "This can only be done by an authorised user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Podoliako Oleksandr"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "podoliako@gmail.com"
+                  },
+                  "birthday": {
+                    "type": "string",
+                    "example": "1980-01-09T19:14:28.000Z"
+                  },
+                  "skype": {
+                    "type": "string",
+                    "example": "podoliako987"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+380677822481"
+                  },
+                  "avatarURL": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Podoliako Oleksandr"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email",
+                      "example": "podoliako@gmail.com"
+                    },
+                    "birthday": {
+                      "type": "string",
+                      "example": "1980-01-09T19:14:28.000Z"
+                    },
+                    "skype": {
+                      "type": "string",
+                      "example": "podoliako987"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "example": "+380677822481"
+                    },
+                    "avatarURL": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/auth/avatar": {
+      "patch": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Update the user avatar",
+        "description": "This can only be done by an authorised user.",
+        "operationId": "uploadFile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "avatarURL"
+                ],
+                "properties": {
+                  "avatarURL": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "avatarURL": {
+                      "type": "string",
+                      "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/tasks": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Get a list of tasks",
+        "description": "This can only be done by an authorised user.",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "64adcced2ab6333f191991a7"
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Buy foods in the shop"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "toDo",
+                          "inProgress",
+                          "done"
+                        ],
+                        "example": "toDo"
+                      },
+                      "priority": {
+                        "type": "string",
+                        "enum": [
+                          "low",
+                          "medium",
+                          "high"
+                        ],
+                        "default": "low"
+                      },
+                      "date": {
+                        "type": "object",
+                        "properties": {
+                          "start": {
+                            "type": "string",
+                            "example": "2023-07-21T09:00:00.000Z"
+                          },
+                          "end": {
+                            "type": "string",
+                            "example": "2023-07-21T12:00:00.000Z"
+                          }
+                        }
+                      },
+                      "owner": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "6460b8d6bca033b6d01b1b9b"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Podoliako Oleksandr"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "podoliako@gmail.com"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Add the task",
+        "description": "This can only be done by an authorised user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "title",
+                  "status",
+                  "priority",
+                  "date"
+                ],
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "64adcced2ab6333f191991a7"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Buy foods in the shop"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "toDo",
+                      "inProgress",
+                      "done"
+                    ],
+                    "example": "toDo"
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ],
+                    "default": "low"
+                  },
+                  "date": {
+                    "required": [
+                      "start",
+                      "end"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "start": {
+                        "type": "string",
+                        "example": "2023-07-21T09:00:00.000Z"
+                      },
+                      "end": {
+                        "type": "string",
+                        "example": "2023-07-21T12:00:00.000Z"
+                      }
+                    }
+                  },
+                  "owner": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "6460b8d6bca033b6d01b1b9b"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "2023-07-20T22:46:27.840Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "2023-07-20T22:46:27.840Z"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "title",
+                    "status",
+                    "priority",
+                    "date"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "64adcced2ab6333f191991a7"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Buy foods in the shop"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "toDo",
+                        "inProgress",
+                        "done"
+                      ],
+                      "example": "toDo"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "enum": [
+                        "low",
+                        "medium",
+                        "high"
+                      ],
+                      "default": "low"
+                    },
+                    "date": {
+                      "required": [
+                        "start",
+                        "end"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "string",
+                          "example": "2023-07-21T09:00:00.000Z"
+                        },
+                        "end": {
+                          "type": "string",
+                          "example": "2023-07-21T12:00:00.000Z"
+                        }
+                      }
+                    },
+                    "owner": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "6460b8d6bca033b6d01b1b9b"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-20T22:46:27.840Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-20T22:46:27.840Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/tasks/{taskID}": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Get the task by ID",
+        "description": "This can only be done by the logged in user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "taskID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "64adcced2ab6333f191991a7"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Buy foods in the shop"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "toDo",
+                        "inProgress",
+                        "done"
+                      ],
+                      "example": "toDo"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "enum": [
+                        "low",
+                        "medium",
+                        "high"
+                      ],
+                      "default": "low"
+                    },
+                    "date": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "string",
+                          "example": "2023-07-21T09:00:00.000Z"
+                        },
+                        "end": {
+                          "type": "string",
+                          "example": "2023-07-21T12:00:00.000Z"
+                        }
+                      }
+                    },
+                    "owner": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "6460b8d6bca033b6d01b1b9b"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Podoliako Oleksandr"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "podoliako@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found. A task with the specified ID was not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Delete the task by ID",
+        "description": "This can only be done by an authorised user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "taskID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found. A task with the specified ID was not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update the task by ID",
+        "description": "This can only be done by an authorised user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "taskID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "title",
+                  "status",
+                  "priority",
+                  "date"
+                ],
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "64adcced2ab6333f191991a7"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Buy foods in the shop"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "toDo",
+                      "inProgress",
+                      "done"
+                    ],
+                    "example": "toDo"
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ],
+                    "default": "low"
+                  },
+                  "date": {
+                    "required": [
+                      "start",
+                      "end"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "start": {
+                        "type": "string",
+                        "example": "2023-07-21T09:00:00.000Z"
+                      },
+                      "end": {
+                        "type": "string",
+                        "example": "2023-07-21T12:00:00.000Z"
+                      }
+                    }
+                  },
+                  "owner": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "6460b8d6bca033b6d01b1b9b"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "2023-07-20T22:46:27.840Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "2023-07-20T22:46:27.840Z"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "title",
+                    "status",
+                    "priority",
+                    "date"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "64adcced2ab6333f191991a7"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Buy foods in the shop"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "toDo",
+                        "inProgress",
+                        "done"
+                      ],
+                      "example": "toDo"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "enum": [
+                        "low",
+                        "medium",
+                        "high"
+                      ],
+                      "default": "low"
+                    },
+                    "date": {
+                      "required": [
+                        "start",
+                        "end"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "string",
+                          "example": "2023-07-21T09:00:00.000Z"
+                        },
+                        "end": {
+                          "type": "string",
+                          "example": "2023-07-21T12:00:00.000Z"
+                        }
+                      }
+                    },
+                    "owner": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "6460b8d6bca033b6d01b1b9b"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-20T22:46:27.840Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-20T22:46:27.840Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found. A task with the specified ID was not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/tasks/{taskID}/status": {
+      "patch": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update the task status by ID",
+        "description": "This can only be done by an authorised user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "taskID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "status"
+                ],
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "toDo",
+                      "inProgress",
+                      "done"
+                    ],
+                    "example": "toDo"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "title",
+                    "status",
+                    "priority",
+                    "date"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "64adcced2ab6333f191991a7"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Buy foods in the shop"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "toDo",
+                        "inProgress",
+                        "done"
+                      ],
+                      "example": "toDo"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "enum": [
+                        "low",
+                        "medium",
+                        "high"
+                      ],
+                      "default": "low"
+                    },
+                    "date": {
+                      "required": [
+                        "start",
+                        "end"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "string",
+                          "example": "2023-07-21T09:00:00.000Z"
+                        },
+                        "end": {
+                          "type": "string",
+                          "example": "2023-07-21T12:00:00.000Z"
+                        }
+                      }
+                    },
+                    "owner": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "6460b8d6bca033b6d01b1b9b"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-20T22:46:27.840Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-20T22:46:27.840Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found. A task with the specified ID was not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/tasks/{taskID}/priority": {
+      "patch": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update the task priority by ID",
+        "description": "This can only be done by an authorised user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "taskID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "priority"
+                ],
+                "type": "object",
+                "properties": {
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "imedium",
+                      "high"
+                    ],
+                    "default": "low"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "title",
+                    "status",
+                    "priority",
+                    "date"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "64adcced2ab6333f191991a7"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Buy foods in the shop"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "toDo",
+                        "inProgress",
+                        "done"
+                      ],
+                      "example": "toDo"
+                    },
+                    "priority": {
+                      "type": "string",
+                      "enum": [
+                        "low",
+                        "medium",
+                        "high"
+                      ],
+                      "default": "low"
+                    },
+                    "date": {
+                      "required": [
+                        "start",
+                        "end"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "string",
+                          "example": "2023-07-21T09:00:00.000Z"
+                        },
+                        "end": {
+                          "type": "string",
+                          "example": "2023-07-21T12:00:00.000Z"
+                        }
+                      }
+                    },
+                    "owner": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "6460b8d6bca033b6d01b1b9b"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-20T22:46:27.840Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-20T22:46:27.840Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found. A task with the specified ID was not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/reviews": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get reviews",
+        "description": "Available to everyone.",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "name",
+                      "email",
+                      "avatar",
+                      "rating",
+                      "text"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "64b5b83d65e0b904e1143eef"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Podoliako Oleksandr"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "podoliako@gmail.com"
+                      },
+                      "avatar": {
+                        "type": "string",
+                        "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                      },
+                      "rating": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 5,
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5
+                        ],
+                        "default": 0
+                      },
+                      "text": {
+                        "type": "string",
+                        "example": "Very goog application!"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "2023-07-23T19:41:05.632Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "2023-07-23T19:41:05.632Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Add the review",
+        "description": "This can only be done by an authorised user. Available only once.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name",
+                  "email",
+                  "avatar",
+                  "rating",
+                  "text"
+                ],
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "64b5b83d65e0b904e1143eef"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Podoliako Oleksandr"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "podoliako@gmail.com"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                  },
+                  "rating": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 5,
+                    "enum": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5
+                    ],
+                    "default": 0
+                  },
+                  "text": {
+                    "type": "string",
+                    "example": "Very goog application!"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "2023-07-23T19:41:05.632Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "2023-07-23T19:41:05.632Z"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "name",
+                    "email",
+                    "avatar",
+                    "rating",
+                    "text"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "64b5b83d65e0b904e1143eef"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Podoliako Oleksandr"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "podoliako@gmail.com"
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                    },
+                    "rating": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 5,
+                      "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                      ],
+                      "default": 0
+                    },
+                    "text": {
+                      "type": "string",
+                      "example": "Very goog application!"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-23T19:41:05.632Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "readOnly": true,
+                      "example": "2023-07-23T19:41:05.632Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SingUp": {
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Podoliako Oleksandr"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "podoliako@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "writeOnly": true,
+            "example": "0810Red!@"
+          }
+        }
+      },
+      "LogIn": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "podoliako@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "writeOnly": true,
+            "example": "0810Red!@"
+          }
+        }
+      },
+      "ResLogIn": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmJkY2Y3ZTZiNWYwN2ZlZGQzY2JjOCIsImlhdCI6MTY5MDIzMDg2MiwiZXhwIjoxNjkwMzEzNjYyfQ.YeLDFL1x6dmKQk8HgTCHRCUhuXCfuB-wxcAsYKzF0iQ"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Podoliako Oleksandr"
+              },
+              "email": {
+                "type": "string",
+                "example": "podoliako@gmail.com"
+              }
+            }
+          }
+        }
+      },
+      "UpdateUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Podoliako Oleksandr"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "podoliako@gmail.com"
+          },
+          "birthday": {
+            "type": "string",
+            "example": "1980-01-09T19:14:28.000Z"
+          },
+          "skype": {
+            "type": "string",
+            "example": "podoliako987"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+380677822481"
+          },
+          "avatarURL": {
+            "type": "string",
+            "readOnly": true,
+            "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+          }
+        }
+      },
+      "UpdateAvatar": {
+        "required": [
+          "avatarURL"
+        ],
+        "properties": {
+          "avatarURL": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "ResAvatar": {
+        "properties": {
+          "avatarURL": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+          }
+        }
+      },
+      "AddTask": {
+        "required": [
+          "title",
+          "status",
+          "priority",
+          "date"
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "64adcced2ab6333f191991a7"
+          },
+          "title": {
+            "type": "string",
+            "example": "Buy foods in the shop"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "toDo",
+              "inProgress",
+              "done"
+            ],
+            "example": "toDo"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "default": "low"
+          },
+          "date": {
+            "required": [
+              "start",
+              "end"
+            ],
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string",
+                "example": "2023-07-21T09:00:00.000Z"
+              },
+              "end": {
+                "type": "string",
+                "example": "2023-07-21T12:00:00.000Z"
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "readOnly": true,
+            "example": "6460b8d6bca033b6d01b1b9b"
+          },
+          "createdAt": {
+            "type": "string",
+            "readOnly": true,
+            "example": "2023-07-20T22:46:27.840Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "readOnly": true,
+            "example": "2023-07-20T22:46:27.840Z"
+          }
+        }
+      },
+      "ResTasks": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "64adcced2ab6333f191991a7"
+          },
+          "title": {
+            "type": "string",
+            "example": "Buy foods in the shop"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "toDo",
+              "inProgress",
+              "done"
+            ],
+            "example": "toDo"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "default": "low"
+          },
+          "date": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string",
+                "example": "2023-07-21T09:00:00.000Z"
+              },
+              "end": {
+                "type": "string",
+                "example": "2023-07-21T12:00:00.000Z"
+              }
+            }
+          },
+          "owner": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "6460b8d6bca033b6d01b1b9b"
+              },
+              "name": {
+                "type": "string",
+                "example": "Podoliako Oleksandr"
+              },
+              "email": {
+                "type": "string",
+                "example": "podoliako@gmail.com"
+              }
+            }
+          }
+        }
+      },
+      "TaskStatus": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "toDo",
+              "inProgress",
+              "done"
+            ],
+            "example": "toDo"
+          }
+        }
+      },
+      "TaskPriority": {
+        "required": [
+          "priority"
+        ],
+        "type": "object",
+        "properties": {
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "imedium",
+              "high"
+            ],
+            "default": "low"
+          }
+        }
+      },
+      "Review": {
+        "required": [
+          "name",
+          "email",
+          "avatar",
+          "rating",
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "readOnly": true,
+            "example": "64b5b83d65e0b904e1143eef"
+          },
+          "name": {
+            "type": "string",
+            "example": "Podoliako Oleksandr"
+          },
+          "email": {
+            "type": "string",
+            "example": "podoliako@gmail.com"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+          },
+          "rating": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5,
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "default": 0
+          },
+          "text": {
+            "type": "string",
+            "example": "Very goog application!"
+          },
+          "createdAt": {
+            "type": "string",
+            "readOnly": true,
+            "example": "2023-07-23T19:41:05.632Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "readOnly": true,
+            "example": "2023-07-23T19:41:05.632Z"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "description": "Enter email and password",
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "description": "Enter JWT (JSON Web Token)",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
