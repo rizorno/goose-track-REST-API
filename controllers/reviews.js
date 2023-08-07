@@ -23,9 +23,7 @@ const add = async (req, res) => {
     review: true,
   });
 
-  const { review } = await User.findOne({ _id });
-
-  res.status(201).json({ result, review });
+  res.status(201).json(result);
 };
 
 module.exports = {

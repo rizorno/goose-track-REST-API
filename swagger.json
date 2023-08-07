@@ -28,7 +28,7 @@
           "Auth"
         ],
         "summary": "Create user",
-        "description": "You will receive a token (active for 1 hour) and must verify your email.",
+        "description": "Email must be verify. Token active for 1 hour and refreshToken active for 2 hours.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -42,18 +42,24 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "Podoliako Oleksandr"
+                    "examples": [
+                      "Podoliako Oleksandr"
+                    ]
                   },
                   "email": {
                     "type": "string",
                     "format": "email",
-                    "example": "podoliako@gmail.com"
+                    "examples": [
+                      "podoliako@gmail.com"
+                    ]
                   },
                   "password": {
                     "type": "string",
                     "format": "password",
                     "writeOnly": true,
-                    "example": "0810Red!@"
+                    "examples": [
+                      "podolfox"
+                    ]
                   }
                 }
               }
@@ -71,18 +77,36 @@
                   "properties": {
                     "token": {
                       "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmJkY2Y3ZTZiNWYwN2ZlZGQzY2JjOCIsImlhdCI6MTY5MDIzMDg2MiwiZXhwIjoxNjkwMzEzNjYyfQ.YeLDFL1x6dmKQk8HgTCHRCUhuXCfuB-wxcAsYKzF0iQ"
+                      "examples": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxMzUwOTgxfQ.fn8KuNFvSvkHM4amtvpWN0cjtkUsB8UY5r9KlK2lggw"
+                      ]
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "examples": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxNjA2NTgxfQ.QY8ViJCNbG8TNZIjPMNxZQKkFx4uwOzQHendnOhdxIc"
+                      ]
+                    },
+                    "refreshTime": {
+                      "type": "number",
+                      "examples": [
+                        1691350981122
+                      ]
                     },
                     "user": {
                       "type": "object",
                       "properties": {
                         "name": {
                           "type": "string",
-                          "example": "Podoliako Oleksandr"
+                          "examples": [
+                            "Podoliako Oleksandr"
+                          ]
                         },
                         "email": {
                           "type": "string",
-                          "example": "podoliako@gmail.com"
+                          "examples": [
+                            "podoliako@gmail.com"
+                          ]
                         }
                       }
                     }
@@ -111,7 +135,7 @@
           "Auth"
         ],
         "summary": "Logs user into the application",
-        "description": "This can only be done by registered user. Token active for 23 hour.",
+        "description": "This can only be done by registered user and after verify email. Token active for 1 hour. RefreshToken active for 3 days.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -125,13 +149,17 @@
                   "email": {
                     "type": "string",
                     "format": "email",
-                    "example": "podoliako@gmail.com"
+                    "examples": [
+                      "podoliako@gmail.com"
+                    ]
                   },
                   "password": {
                     "type": "string",
                     "format": "password",
                     "writeOnly": true,
-                    "example": "0810Red!@"
+                    "examples": [
+                      "podolfox"
+                    ]
                   }
                 }
               }
@@ -154,18 +182,36 @@
                   "properties": {
                     "token": {
                       "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmJkY2Y3ZTZiNWYwN2ZlZGQzY2JjOCIsImlhdCI6MTY5MDIzMDg2MiwiZXhwIjoxNjkwMzEzNjYyfQ.YeLDFL1x6dmKQk8HgTCHRCUhuXCfuB-wxcAsYKzF0iQ"
+                      "examples": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxMzUwOTgxfQ.fn8KuNFvSvkHM4amtvpWN0cjtkUsB8UY5r9KlK2lggw"
+                      ]
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "examples": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxNjA2NTgxfQ.QY8ViJCNbG8TNZIjPMNxZQKkFx4uwOzQHendnOhdxIc"
+                      ]
+                    },
+                    "refreshTime": {
+                      "type": "number",
+                      "examples": [
+                        1691350981122
+                      ]
                     },
                     "user": {
                       "type": "object",
                       "properties": {
                         "name": {
                           "type": "string",
-                          "example": "Podoliako Oleksandr"
+                          "examples": [
+                            "Podoliako Oleksandr"
+                          ]
                         },
                         "email": {
                           "type": "string",
-                          "example": "podoliako@gmail.com"
+                          "examples": [
+                            "podoliako@gmail.com"
+                          ]
                         }
                       }
                     }
@@ -205,6 +251,99 @@
         ]
       }
     },
+    "/api/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Refresh token",
+        "description": "This can only be done by an authorised user.",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "examples": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxMzUwOTgxfQ.fn8KuNFvSvkHM4amtvpWN0cjtkUsB8UY5r9KlK2lggw"
+                      ]
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "examples": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxNjA2NTgxfQ.QY8ViJCNbG8TNZIjPMNxZQKkFx4uwOzQHendnOhdxIc"
+                      ]
+                    },
+                    "refreshTime": {
+                      "type": "number",
+                      "examples": [
+                        1691350981122
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/auth/verify": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Resend verification email",
+        "description": "Possibility to receive a verification email again.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "examples": [
+                      "podoliako@gmail.com"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/api/auth/current": {
       "get": {
         "tags": [
@@ -222,29 +361,48 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "example": "Podoliako Oleksandr"
+                      "examples": [
+                        "Podoliako Oleksandr"
+                      ]
                     },
                     "email": {
                       "type": "string",
                       "format": "email",
-                      "example": "podoliako@gmail.com"
+                      "examples": [
+                        "podoliako@gmail.com"
+                      ]
                     },
                     "birthday": {
                       "type": "string",
-                      "example": "1980-01-09T19:14:28.000Z"
+                      "examples": [
+                        "1980-01-09T19:14:28.000Z"
+                      ]
                     },
                     "skype": {
                       "type": "string",
-                      "example": "podoliako987"
+                      "examples": [
+                        "podolfox"
+                      ]
                     },
                     "phone": {
                       "type": "string",
-                      "example": "+380677822481"
+                      "examples": [
+                        "+380677822481"
+                      ]
                     },
                     "avatarURL": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                      "examples": [
+                        "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                      ]
+                    },
+                    "review": {
+                      "type": "boolean",
+                      "readOnly": true,
+                      "examples": [
+                        false
+                      ]
                     }
                   }
                 }
@@ -280,29 +438,48 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "Podoliako Oleksandr"
+                    "examples": [
+                      "Podoliako Oleksandr"
+                    ]
                   },
                   "email": {
                     "type": "string",
                     "format": "email",
-                    "example": "podoliako@gmail.com"
+                    "examples": [
+                      "podoliako@gmail.com"
+                    ]
                   },
                   "birthday": {
                     "type": "string",
-                    "example": "1980-01-09T19:14:28.000Z"
+                    "examples": [
+                      "1980-01-09T19:14:28.000Z"
+                    ]
                   },
                   "skype": {
                     "type": "string",
-                    "example": "podoliako987"
+                    "examples": [
+                      "podolfox"
+                    ]
                   },
                   "phone": {
                     "type": "string",
-                    "example": "+380677822481"
+                    "examples": [
+                      "+380677822481"
+                    ]
                   },
                   "avatarURL": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                    "examples": [
+                      "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                    ]
+                  },
+                  "review": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "examples": [
+                      false
+                    ]
                   }
                 }
               }
@@ -320,29 +497,48 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "example": "Podoliako Oleksandr"
+                      "examples": [
+                        "Podoliako Oleksandr"
+                      ]
                     },
                     "email": {
                       "type": "string",
                       "format": "email",
-                      "example": "podoliako@gmail.com"
+                      "examples": [
+                        "podoliako@gmail.com"
+                      ]
                     },
                     "birthday": {
                       "type": "string",
-                      "example": "1980-01-09T19:14:28.000Z"
+                      "examples": [
+                        "1980-01-09T19:14:28.000Z"
+                      ]
                     },
                     "skype": {
                       "type": "string",
-                      "example": "podoliako987"
+                      "examples": [
+                        "podolfox"
+                      ]
                     },
                     "phone": {
                       "type": "string",
-                      "example": "+380677822481"
+                      "examples": [
+                        "+380677822481"
+                      ]
                     },
                     "avatarURL": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                      "examples": [
+                        "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                      ]
+                    },
+                    "review": {
+                      "type": "boolean",
+                      "readOnly": true,
+                      "examples": [
+                        false
+                      ]
                     }
                   }
                 }
@@ -354,6 +550,32 @@
           },
           "401": {
             "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Delete the account and all its content with the review",
+        "description": "This can only be done by an authorised user.",
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found. User was not found."
           },
           "500": {
             "description": "Internal server error"
@@ -401,7 +623,9 @@
                   "properties": {
                     "avatarURL": {
                       "type": "string",
-                      "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                      "examples": [
+                        "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+                      ]
                     }
                   }
                 }
@@ -444,11 +668,15 @@
                     "properties": {
                       "_id": {
                         "type": "string",
-                        "example": "64adcced2ab6333f191991a7"
+                        "examples": [
+                          "64adcced2ab6333f191991a7"
+                        ]
                       },
                       "title": {
                         "type": "string",
-                        "example": "Buy foods in the shop"
+                        "examples": [
+                          "Buy foods in the shop"
+                        ]
                       },
                       "status": {
                         "type": "string",
@@ -457,7 +685,9 @@
                           "inProgress",
                           "done"
                         ],
-                        "example": "toDo"
+                        "examples": [
+                          "toDo"
+                        ]
                       },
                       "priority": {
                         "type": "string",
@@ -473,11 +703,15 @@
                         "properties": {
                           "start": {
                             "type": "string",
-                            "example": "2023-07-21T09:00:00.000Z"
+                            "examples": [
+                              "2023-07-21T09:00:00.000Z"
+                            ]
                           },
                           "end": {
                             "type": "string",
-                            "example": "2023-07-21T12:00:00.000Z"
+                            "examples": [
+                              "2023-07-21T12:00:00.000Z"
+                            ]
                           }
                         }
                       },
@@ -486,15 +720,21 @@
                         "properties": {
                           "_id": {
                             "type": "string",
-                            "example": "6460b8d6bca033b6d01b1b9b"
+                            "examples": [
+                              "6460b8d6bca033b6d01b1b9b"
+                            ]
                           },
                           "name": {
                             "type": "string",
-                            "example": "Podoliako Oleksandr"
+                            "examples": [
+                              "Podoliako Oleksandr"
+                            ]
                           },
                           "email": {
                             "type": "string",
-                            "example": "podoliako@gmail.com"
+                            "examples": [
+                              "podoliako@gmail.com"
+                            ]
                           }
                         }
                       }
@@ -538,11 +778,15 @@
                   "_id": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "64adcced2ab6333f191991a7"
+                    "examples": [
+                      "64adcced2ab6333f191991a7"
+                    ]
                   },
                   "title": {
                     "type": "string",
-                    "example": "Buy foods in the shop"
+                    "examples": [
+                      "Buy foods in the shop"
+                    ]
                   },
                   "status": {
                     "type": "string",
@@ -551,7 +795,9 @@
                       "inProgress",
                       "done"
                     ],
-                    "example": "toDo"
+                    "examples": [
+                      "toDo"
+                    ]
                   },
                   "priority": {
                     "type": "string",
@@ -571,28 +817,38 @@
                     "properties": {
                       "start": {
                         "type": "string",
-                        "example": "2023-07-21T09:00:00.000Z"
+                        "examples": [
+                          "2023-07-21T09:00:00.000Z"
+                        ]
                       },
                       "end": {
                         "type": "string",
-                        "example": "2023-07-21T12:00:00.000Z"
+                        "examples": [
+                          "2023-07-21T12:00:00.000Z"
+                        ]
                       }
                     }
                   },
                   "owner": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "6460b8d6bca033b6d01b1b9b"
+                    "examples": [
+                      "6460b8d6bca033b6d01b1b9b"
+                    ]
                   },
                   "createdAt": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "2023-07-20T22:46:27.840Z"
+                    "examples": [
+                      "2023-07-20T22:46:27.840Z"
+                    ]
                   },
                   "updatedAt": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "2023-07-20T22:46:27.840Z"
+                    "examples": [
+                      "2023-07-20T22:46:27.840Z"
+                    ]
                   }
                 }
               }
@@ -617,11 +873,15 @@
                     "_id": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "64adcced2ab6333f191991a7"
+                      "examples": [
+                        "64adcced2ab6333f191991a7"
+                      ]
                     },
                     "title": {
                       "type": "string",
-                      "example": "Buy foods in the shop"
+                      "examples": [
+                        "Buy foods in the shop"
+                      ]
                     },
                     "status": {
                       "type": "string",
@@ -630,7 +890,9 @@
                         "inProgress",
                         "done"
                       ],
-                      "example": "toDo"
+                      "examples": [
+                        "toDo"
+                      ]
                     },
                     "priority": {
                       "type": "string",
@@ -650,28 +912,38 @@
                       "properties": {
                         "start": {
                           "type": "string",
-                          "example": "2023-07-21T09:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T09:00:00.000Z"
+                          ]
                         },
                         "end": {
                           "type": "string",
-                          "example": "2023-07-21T12:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T12:00:00.000Z"
+                          ]
                         }
                       }
                     },
                     "owner": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "6460b8d6bca033b6d01b1b9b"
+                      "examples": [
+                        "6460b8d6bca033b6d01b1b9b"
+                      ]
                     },
                     "createdAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-20T22:46:27.840Z"
+                      "examples": [
+                        "2023-07-20T22:46:27.840Z"
+                      ]
                     },
                     "updatedAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-20T22:46:27.840Z"
+                      "examples": [
+                        "2023-07-20T22:46:27.840Z"
+                      ]
                     }
                   }
                 }
@@ -683,6 +955,196 @@
           },
           "401": {
             "description": "Not authorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/tasks/filter": {
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Filter tasks",
+        "description": "This can only be done by an authorised user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "foods"
+                    ]
+                  },
+                  "status": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "toDo",
+                        "inProgress",
+                        "done"
+                      ]
+                    },
+                    "default": [],
+                    "examples": [
+                      [
+                        "toDo",
+                        "done"
+                      ]
+                    ]
+                  },
+                  "priority": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "low",
+                        "medium",
+                        "high"
+                      ]
+                    },
+                    "default": [],
+                    "examples": [
+                      [
+                        "low",
+                        "high"
+                      ]
+                    ]
+                  },
+                  "start": {
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "morning",
+                        "afternoon",
+                        "evening",
+                        "night"
+                      ]
+                    },
+                    "default": [],
+                    "examples": [
+                      [
+                        "morning",
+                        "night"
+                      ]
+                    ]
+                  },
+                  "end": {
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "morning",
+                        "afternoon",
+                        "evening",
+                        "night"
+                      ]
+                    },
+                    "default": [],
+                    "examples": [
+                      [
+                        "evening",
+                        "afternoon",
+                        "morning"
+                      ]
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "examples": [
+                          "64adcced2ab6333f191991a7"
+                        ]
+                      },
+                      "title": {
+                        "type": "string",
+                        "examples": [
+                          "Buy foods in the shop"
+                        ]
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "toDo",
+                          "inProgress",
+                          "done"
+                        ],
+                        "examples": [
+                          "toDo"
+                        ]
+                      },
+                      "priority": {
+                        "type": "string",
+                        "enum": [
+                          "low",
+                          "medium",
+                          "high"
+                        ],
+                        "default": "low"
+                      },
+                      "date": {
+                        "type": "object",
+                        "properties": {
+                          "start": {
+                            "type": "string",
+                            "examples": [
+                              "2023-07-21T09:00:00.000Z"
+                            ]
+                          },
+                          "end": {
+                            "type": "string",
+                            "examples": [
+                              "2023-07-21T12:00:00.000Z"
+                            ]
+                          }
+                        }
+                      },
+                      "owner": {
+                        "type": "string",
+                        "examples": [
+                          "6460b8d6bca033b6d01b1b9b"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found."
           },
           "500": {
             "description": "Internal server error"
@@ -722,11 +1184,15 @@
                   "properties": {
                     "_id": {
                       "type": "string",
-                      "example": "64adcced2ab6333f191991a7"
+                      "examples": [
+                        "64adcced2ab6333f191991a7"
+                      ]
                     },
                     "title": {
                       "type": "string",
-                      "example": "Buy foods in the shop"
+                      "examples": [
+                        "Buy foods in the shop"
+                      ]
                     },
                     "status": {
                       "type": "string",
@@ -735,7 +1201,9 @@
                         "inProgress",
                         "done"
                       ],
-                      "example": "toDo"
+                      "examples": [
+                        "toDo"
+                      ]
                     },
                     "priority": {
                       "type": "string",
@@ -751,11 +1219,15 @@
                       "properties": {
                         "start": {
                           "type": "string",
-                          "example": "2023-07-21T09:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T09:00:00.000Z"
+                          ]
                         },
                         "end": {
                           "type": "string",
-                          "example": "2023-07-21T12:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T12:00:00.000Z"
+                          ]
                         }
                       }
                     },
@@ -764,15 +1236,21 @@
                       "properties": {
                         "_id": {
                           "type": "string",
-                          "example": "6460b8d6bca033b6d01b1b9b"
+                          "examples": [
+                            "6460b8d6bca033b6d01b1b9b"
+                          ]
                         },
                         "name": {
                           "type": "string",
-                          "example": "Podoliako Oleksandr"
+                          "examples": [
+                            "Podoliako Oleksandr"
+                          ]
                         },
                         "email": {
                           "type": "string",
-                          "example": "podoliako@gmail.com"
+                          "examples": [
+                            "podoliako@gmail.com"
+                          ]
                         }
                       }
                     }
@@ -867,11 +1345,15 @@
                   "_id": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "64adcced2ab6333f191991a7"
+                    "examples": [
+                      "64adcced2ab6333f191991a7"
+                    ]
                   },
                   "title": {
                     "type": "string",
-                    "example": "Buy foods in the shop"
+                    "examples": [
+                      "Buy foods in the shop"
+                    ]
                   },
                   "status": {
                     "type": "string",
@@ -880,7 +1362,9 @@
                       "inProgress",
                       "done"
                     ],
-                    "example": "toDo"
+                    "examples": [
+                      "toDo"
+                    ]
                   },
                   "priority": {
                     "type": "string",
@@ -900,28 +1384,38 @@
                     "properties": {
                       "start": {
                         "type": "string",
-                        "example": "2023-07-21T09:00:00.000Z"
+                        "examples": [
+                          "2023-07-21T09:00:00.000Z"
+                        ]
                       },
                       "end": {
                         "type": "string",
-                        "example": "2023-07-21T12:00:00.000Z"
+                        "examples": [
+                          "2023-07-21T12:00:00.000Z"
+                        ]
                       }
                     }
                   },
                   "owner": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "6460b8d6bca033b6d01b1b9b"
+                    "examples": [
+                      "6460b8d6bca033b6d01b1b9b"
+                    ]
                   },
                   "createdAt": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "2023-07-20T22:46:27.840Z"
+                    "examples": [
+                      "2023-07-20T22:46:27.840Z"
+                    ]
                   },
                   "updatedAt": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "2023-07-20T22:46:27.840Z"
+                    "examples": [
+                      "2023-07-20T22:46:27.840Z"
+                    ]
                   }
                 }
               }
@@ -946,11 +1440,15 @@
                     "_id": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "64adcced2ab6333f191991a7"
+                      "examples": [
+                        "64adcced2ab6333f191991a7"
+                      ]
                     },
                     "title": {
                       "type": "string",
-                      "example": "Buy foods in the shop"
+                      "examples": [
+                        "Buy foods in the shop"
+                      ]
                     },
                     "status": {
                       "type": "string",
@@ -959,7 +1457,9 @@
                         "inProgress",
                         "done"
                       ],
-                      "example": "toDo"
+                      "examples": [
+                        "toDo"
+                      ]
                     },
                     "priority": {
                       "type": "string",
@@ -979,28 +1479,38 @@
                       "properties": {
                         "start": {
                           "type": "string",
-                          "example": "2023-07-21T09:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T09:00:00.000Z"
+                          ]
                         },
                         "end": {
                           "type": "string",
-                          "example": "2023-07-21T12:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T12:00:00.000Z"
+                          ]
                         }
                       }
                     },
                     "owner": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "6460b8d6bca033b6d01b1b9b"
+                      "examples": [
+                        "6460b8d6bca033b6d01b1b9b"
+                      ]
                     },
                     "createdAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-20T22:46:27.840Z"
+                      "examples": [
+                        "2023-07-20T22:46:27.840Z"
+                      ]
                     },
                     "updatedAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-20T22:46:27.840Z"
+                      "examples": [
+                        "2023-07-20T22:46:27.840Z"
+                      ]
                     }
                   }
                 }
@@ -1060,7 +1570,9 @@
                       "inProgress",
                       "done"
                     ],
-                    "example": "toDo"
+                    "examples": [
+                      "toDo"
+                    ]
                   }
                 }
               }
@@ -1085,11 +1597,15 @@
                     "_id": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "64adcced2ab6333f191991a7"
+                      "examples": [
+                        "64adcced2ab6333f191991a7"
+                      ]
                     },
                     "title": {
                       "type": "string",
-                      "example": "Buy foods in the shop"
+                      "examples": [
+                        "Buy foods in the shop"
+                      ]
                     },
                     "status": {
                       "type": "string",
@@ -1098,7 +1614,9 @@
                         "inProgress",
                         "done"
                       ],
-                      "example": "toDo"
+                      "examples": [
+                        "toDo"
+                      ]
                     },
                     "priority": {
                       "type": "string",
@@ -1118,28 +1636,38 @@
                       "properties": {
                         "start": {
                           "type": "string",
-                          "example": "2023-07-21T09:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T09:00:00.000Z"
+                          ]
                         },
                         "end": {
                           "type": "string",
-                          "example": "2023-07-21T12:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T12:00:00.000Z"
+                          ]
                         }
                       }
                     },
                     "owner": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "6460b8d6bca033b6d01b1b9b"
+                      "examples": [
+                        "6460b8d6bca033b6d01b1b9b"
+                      ]
                     },
                     "createdAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-20T22:46:27.840Z"
+                      "examples": [
+                        "2023-07-20T22:46:27.840Z"
+                      ]
                     },
                     "updatedAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-20T22:46:27.840Z"
+                      "examples": [
+                        "2023-07-20T22:46:27.840Z"
+                      ]
                     }
                   }
                 }
@@ -1224,11 +1752,15 @@
                     "_id": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "64adcced2ab6333f191991a7"
+                      "examples": [
+                        "64adcced2ab6333f191991a7"
+                      ]
                     },
                     "title": {
                       "type": "string",
-                      "example": "Buy foods in the shop"
+                      "examples": [
+                        "Buy foods in the shop"
+                      ]
                     },
                     "status": {
                       "type": "string",
@@ -1237,7 +1769,9 @@
                         "inProgress",
                         "done"
                       ],
-                      "example": "toDo"
+                      "examples": [
+                        "toDo"
+                      ]
                     },
                     "priority": {
                       "type": "string",
@@ -1257,28 +1791,38 @@
                       "properties": {
                         "start": {
                           "type": "string",
-                          "example": "2023-07-21T09:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T09:00:00.000Z"
+                          ]
                         },
                         "end": {
                           "type": "string",
-                          "example": "2023-07-21T12:00:00.000Z"
+                          "examples": [
+                            "2023-07-21T12:00:00.000Z"
+                          ]
                         }
                       }
                     },
                     "owner": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "6460b8d6bca033b6d01b1b9b"
+                      "examples": [
+                        "6460b8d6bca033b6d01b1b9b"
+                      ]
                     },
                     "createdAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-20T22:46:27.840Z"
+                      "examples": [
+                        "2023-07-20T22:46:27.840Z"
+                      ]
                     },
                     "updatedAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-20T22:46:27.840Z"
+                      "examples": [
+                        "2023-07-20T22:46:27.840Z"
+                      ]
                     }
                   }
                 }
@@ -1332,19 +1876,27 @@
                       "_id": {
                         "type": "string",
                         "readOnly": true,
-                        "example": "64b5b83d65e0b904e1143eef"
+                        "examples": [
+                          "64b5b83d65e0b904e1143eef"
+                        ]
                       },
                       "name": {
                         "type": "string",
-                        "example": "Podoliako Oleksandr"
+                        "examples": [
+                          "Podoliako Oleksandr"
+                        ]
                       },
                       "email": {
                         "type": "string",
-                        "example": "podoliako@gmail.com"
+                        "examples": [
+                          "podoliako@gmail.com"
+                        ]
                       },
                       "avatar": {
                         "type": "string",
-                        "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                        "examples": [
+                          "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                        ]
                       },
                       "rating": {
                         "type": "integer",
@@ -1362,17 +1914,23 @@
                       },
                       "text": {
                         "type": "string",
-                        "example": "Very goog application!"
+                        "examples": [
+                          "Very goog app!"
+                        ]
                       },
                       "createdAt": {
                         "type": "string",
                         "readOnly": true,
-                        "example": "2023-07-23T19:41:05.632Z"
+                        "examples": [
+                          "2023-07-23T19:41:05.632Z"
+                        ]
                       },
                       "updatedAt": {
                         "type": "string",
                         "readOnly": true,
-                        "example": "2023-07-23T19:41:05.632Z"
+                        "examples": [
+                          "2023-07-23T19:41:05.632Z"
+                        ]
                       }
                     }
                   }
@@ -1407,19 +1965,27 @@
                   "_id": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "64b5b83d65e0b904e1143eef"
+                    "examples": [
+                      "64b5b83d65e0b904e1143eef"
+                    ]
                   },
                   "name": {
                     "type": "string",
-                    "example": "Podoliako Oleksandr"
+                    "examples": [
+                      "Podoliako Oleksandr"
+                    ]
                   },
                   "email": {
                     "type": "string",
-                    "example": "podoliako@gmail.com"
+                    "examples": [
+                      "podoliako@gmail.com"
+                    ]
                   },
                   "avatar": {
                     "type": "string",
-                    "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                    "examples": [
+                      "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                    ]
                   },
                   "rating": {
                     "type": "integer",
@@ -1437,17 +2003,23 @@
                   },
                   "text": {
                     "type": "string",
-                    "example": "Very goog application!"
+                    "examples": [
+                      "Very goog app!"
+                    ]
                   },
                   "createdAt": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "2023-07-23T19:41:05.632Z"
+                    "examples": [
+                      "2023-07-23T19:41:05.632Z"
+                    ]
                   },
                   "updatedAt": {
                     "type": "string",
                     "readOnly": true,
-                    "example": "2023-07-23T19:41:05.632Z"
+                    "examples": [
+                      "2023-07-23T19:41:05.632Z"
+                    ]
                   }
                 }
               }
@@ -1473,19 +2045,27 @@
                     "_id": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "64b5b83d65e0b904e1143eef"
+                      "examples": [
+                        "64b5b83d65e0b904e1143eef"
+                      ]
                     },
                     "name": {
                       "type": "string",
-                      "example": "Podoliako Oleksandr"
+                      "examples": [
+                        "Podoliako Oleksandr"
+                      ]
                     },
                     "email": {
                       "type": "string",
-                      "example": "podoliako@gmail.com"
+                      "examples": [
+                        "podoliako@gmail.com"
+                      ]
                     },
                     "avatar": {
                       "type": "string",
-                      "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                      "examples": [
+                        "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+                      ]
                     },
                     "rating": {
                       "type": "integer",
@@ -1503,17 +2083,23 @@
                     },
                     "text": {
                       "type": "string",
-                      "example": "Very goog application!"
+                      "examples": [
+                        "Very goog app!"
+                      ]
                     },
                     "createdAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-23T19:41:05.632Z"
+                      "examples": [
+                        "2023-07-23T19:41:05.632Z"
+                      ]
                     },
                     "updatedAt": {
                       "type": "string",
                       "readOnly": true,
-                      "example": "2023-07-23T19:41:05.632Z"
+                      "examples": [
+                        "2023-07-23T19:41:05.632Z"
+                      ]
                     }
                   }
                 }
@@ -1550,18 +2136,24 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "Podoliako Oleksandr"
+            "examples": [
+              "Podoliako Oleksandr"
+            ]
           },
           "email": {
             "type": "string",
             "format": "email",
-            "example": "podoliako@gmail.com"
+            "examples": [
+              "podoliako@gmail.com"
+            ]
           },
           "password": {
             "type": "string",
             "format": "password",
             "writeOnly": true,
-            "example": "0810Red!@"
+            "examples": [
+              "podolfox"
+            ]
           }
         }
       },
@@ -1575,13 +2167,17 @@
           "email": {
             "type": "string",
             "format": "email",
-            "example": "podoliako@gmail.com"
+            "examples": [
+              "podoliako@gmail.com"
+            ]
           },
           "password": {
             "type": "string",
             "format": "password",
             "writeOnly": true,
-            "example": "0810Red!@"
+            "examples": [
+              "podolfox"
+            ]
           }
         }
       },
@@ -1590,20 +2186,72 @@
         "properties": {
           "token": {
             "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmJkY2Y3ZTZiNWYwN2ZlZGQzY2JjOCIsImlhdCI6MTY5MDIzMDg2MiwiZXhwIjoxNjkwMzEzNjYyfQ.YeLDFL1x6dmKQk8HgTCHRCUhuXCfuB-wxcAsYKzF0iQ"
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxMzUwOTgxfQ.fn8KuNFvSvkHM4amtvpWN0cjtkUsB8UY5r9KlK2lggw"
+            ]
+          },
+          "refreshToken": {
+            "type": "string",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxNjA2NTgxfQ.QY8ViJCNbG8TNZIjPMNxZQKkFx4uwOzQHendnOhdxIc"
+            ]
+          },
+          "refreshTime": {
+            "type": "number",
+            "examples": [
+              1691350981122
+            ]
           },
           "user": {
             "type": "object",
             "properties": {
               "name": {
                 "type": "string",
-                "example": "Podoliako Oleksandr"
+                "examples": [
+                  "Podoliako Oleksandr"
+                ]
               },
               "email": {
                 "type": "string",
-                "example": "podoliako@gmail.com"
+                "examples": [
+                  "podoliako@gmail.com"
+                ]
               }
             }
+          }
+        }
+      },
+      "ResRefresh": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxMzUwOTgxfQ.fn8KuNFvSvkHM4amtvpWN0cjtkUsB8UY5r9KlK2lggw"
+            ]
+          },
+          "refreshToken": {
+            "type": "string",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2FkYmE4OTU4ODQ0NGUzNTMyOTNhNiIsImlhdCI6MTY5MTM0NzM4MSwiZXhwIjoxNjkxNjA2NTgxfQ.QY8ViJCNbG8TNZIjPMNxZQKkFx4uwOzQHendnOhdxIc"
+            ]
+          },
+          "refreshTime": {
+            "type": "number",
+            "examples": [
+              1691350981122
+            ]
+          }
+        }
+      },
+      "Verify": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "examples": [
+              "podoliako@gmail.com"
+            ]
           }
         }
       },
@@ -1612,29 +2260,48 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "Podoliako Oleksandr"
+            "examples": [
+              "Podoliako Oleksandr"
+            ]
           },
           "email": {
             "type": "string",
             "format": "email",
-            "example": "podoliako@gmail.com"
+            "examples": [
+              "podoliako@gmail.com"
+            ]
           },
           "birthday": {
             "type": "string",
-            "example": "1980-01-09T19:14:28.000Z"
+            "examples": [
+              "1980-01-09T19:14:28.000Z"
+            ]
           },
           "skype": {
             "type": "string",
-            "example": "podoliako987"
+            "examples": [
+              "podolfox"
+            ]
           },
           "phone": {
             "type": "string",
-            "example": "+380677822481"
+            "examples": [
+              "+380677822481"
+            ]
           },
           "avatarURL": {
             "type": "string",
             "readOnly": true,
-            "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+            "examples": [
+              "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+            ]
+          },
+          "review": {
+            "type": "boolean",
+            "readOnly": true,
+            "examples": [
+              false
+            ]
           }
         }
       },
@@ -1653,7 +2320,9 @@
         "properties": {
           "avatarURL": {
             "type": "string",
-            "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+            "examples": [
+              "https://res.cloudinary.com/dukdnnjja/image/upload/v1690033374/avatars/6460b8d6bca033b6d01b1b9b.png"
+            ]
           }
         }
       },
@@ -1669,11 +2338,15 @@
           "_id": {
             "type": "string",
             "readOnly": true,
-            "example": "64adcced2ab6333f191991a7"
+            "examples": [
+              "64adcced2ab6333f191991a7"
+            ]
           },
           "title": {
             "type": "string",
-            "example": "Buy foods in the shop"
+            "examples": [
+              "Buy foods in the shop"
+            ]
           },
           "status": {
             "type": "string",
@@ -1682,7 +2355,9 @@
               "inProgress",
               "done"
             ],
-            "example": "toDo"
+            "examples": [
+              "toDo"
+            ]
           },
           "priority": {
             "type": "string",
@@ -1702,28 +2377,38 @@
             "properties": {
               "start": {
                 "type": "string",
-                "example": "2023-07-21T09:00:00.000Z"
+                "examples": [
+                  "2023-07-21T09:00:00.000Z"
+                ]
               },
               "end": {
                 "type": "string",
-                "example": "2023-07-21T12:00:00.000Z"
+                "examples": [
+                  "2023-07-21T12:00:00.000Z"
+                ]
               }
             }
           },
           "owner": {
             "type": "string",
             "readOnly": true,
-            "example": "6460b8d6bca033b6d01b1b9b"
+            "examples": [
+              "6460b8d6bca033b6d01b1b9b"
+            ]
           },
           "createdAt": {
             "type": "string",
             "readOnly": true,
-            "example": "2023-07-20T22:46:27.840Z"
+            "examples": [
+              "2023-07-20T22:46:27.840Z"
+            ]
           },
           "updatedAt": {
             "type": "string",
             "readOnly": true,
-            "example": "2023-07-20T22:46:27.840Z"
+            "examples": [
+              "2023-07-20T22:46:27.840Z"
+            ]
           }
         }
       },
@@ -1732,11 +2417,15 @@
         "properties": {
           "_id": {
             "type": "string",
-            "example": "64adcced2ab6333f191991a7"
+            "examples": [
+              "64adcced2ab6333f191991a7"
+            ]
           },
           "title": {
             "type": "string",
-            "example": "Buy foods in the shop"
+            "examples": [
+              "Buy foods in the shop"
+            ]
           },
           "status": {
             "type": "string",
@@ -1745,7 +2434,9 @@
               "inProgress",
               "done"
             ],
-            "example": "toDo"
+            "examples": [
+              "toDo"
+            ]
           },
           "priority": {
             "type": "string",
@@ -1761,11 +2452,15 @@
             "properties": {
               "start": {
                 "type": "string",
-                "example": "2023-07-21T09:00:00.000Z"
+                "examples": [
+                  "2023-07-21T09:00:00.000Z"
+                ]
               },
               "end": {
                 "type": "string",
-                "example": "2023-07-21T12:00:00.000Z"
+                "examples": [
+                  "2023-07-21T12:00:00.000Z"
+                ]
               }
             }
           },
@@ -1774,17 +2469,168 @@
             "properties": {
               "_id": {
                 "type": "string",
-                "example": "6460b8d6bca033b6d01b1b9b"
+                "examples": [
+                  "6460b8d6bca033b6d01b1b9b"
+                ]
               },
               "name": {
                 "type": "string",
-                "example": "Podoliako Oleksandr"
+                "examples": [
+                  "Podoliako Oleksandr"
+                ]
               },
               "email": {
                 "type": "string",
-                "example": "podoliako@gmail.com"
+                "examples": [
+                  "podoliako@gmail.com"
+                ]
               }
             }
+          }
+        }
+      },
+      "Filter": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "default": "",
+            "examples": [
+              "foods"
+            ]
+          },
+          "status": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "toDo",
+                "inProgress",
+                "done"
+              ]
+            },
+            "default": [],
+            "examples": [
+              [
+                "toDo",
+                "done"
+              ]
+            ]
+          },
+          "priority": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ]
+            },
+            "default": [],
+            "examples": [
+              [
+                "low",
+                "high"
+              ]
+            ]
+          },
+          "start": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "morning",
+                "afternoon",
+                "evening",
+                "night"
+              ]
+            },
+            "default": [],
+            "examples": [
+              [
+                "morning",
+                "night"
+              ]
+            ]
+          },
+          "end": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "morning",
+                "afternoon",
+                "evening",
+                "night"
+              ]
+            },
+            "default": [],
+            "examples": [
+              [
+                "evening",
+                "afternoon",
+                "morning"
+              ]
+            ]
+          }
+        }
+      },
+      "ResFilter": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "examples": [
+              "64adcced2ab6333f191991a7"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "examples": [
+              "Buy foods in the shop"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "toDo",
+              "inProgress",
+              "done"
+            ],
+            "examples": [
+              "toDo"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "default": "low"
+          },
+          "date": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string",
+                "examples": [
+                  "2023-07-21T09:00:00.000Z"
+                ]
+              },
+              "end": {
+                "type": "string",
+                "examples": [
+                  "2023-07-21T12:00:00.000Z"
+                ]
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "examples": [
+              "6460b8d6bca033b6d01b1b9b"
+            ]
           }
         }
       },
@@ -1801,7 +2647,9 @@
               "inProgress",
               "done"
             ],
-            "example": "toDo"
+            "examples": [
+              "toDo"
+            ]
           }
         }
       },
@@ -1835,19 +2683,27 @@
           "_id": {
             "type": "string",
             "readOnly": true,
-            "example": "64b5b83d65e0b904e1143eef"
+            "examples": [
+              "64b5b83d65e0b904e1143eef"
+            ]
           },
           "name": {
             "type": "string",
-            "example": "Podoliako Oleksandr"
+            "examples": [
+              "Podoliako Oleksandr"
+            ]
           },
           "email": {
             "type": "string",
-            "example": "podoliako@gmail.com"
+            "examples": [
+              "podoliako@gmail.com"
+            ]
           },
           "avatar": {
             "type": "string",
-            "example": "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+            "examples": [
+              "https://res.cloudinary.com/dukdnnjja/image/upload/v1690141048/avatars/64bc3040e6b5f07fedd3cc10.png"
+            ]
           },
           "rating": {
             "type": "integer",
@@ -1865,17 +2721,23 @@
           },
           "text": {
             "type": "string",
-            "example": "Very goog application!"
+            "examples": [
+              "Very goog app!"
+            ]
           },
           "createdAt": {
             "type": "string",
             "readOnly": true,
-            "example": "2023-07-23T19:41:05.632Z"
+            "examples": [
+              "2023-07-23T19:41:05.632Z"
+            ]
           },
           "updatedAt": {
             "type": "string",
             "readOnly": true,
-            "example": "2023-07-23T19:41:05.632Z"
+            "examples": [
+              "2023-07-23T19:41:05.632Z"
+            ]
           }
         }
       }
